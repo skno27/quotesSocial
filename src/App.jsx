@@ -26,8 +26,8 @@ function RegisterAndLogout() {
 }
 
 function App() {
-  const token = localStorage.getItem(ACCESS_TOKEN);
-  if (!token) console.log("access denied");
+  // const token = localStorage.getItem(ACCESS_TOKEN);
+  // if (!token) console.log("access denied");
   return (
     <>
       <header>
