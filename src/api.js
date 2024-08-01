@@ -14,11 +14,34 @@ api.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     } else {
       // remove authorization header for unauthenticated requests
-      delete config.headers.Authorization
+      delete config.headers.Authorization;
     }
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Adding a response interceptor to handle errors globally
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response) {
+      if (error.response.status === 401) {
+        // Redirect to login or refresh token
+        console.error("Unauthorized access - go back to login");
+      }
+      if (error.response.status === 403) {
+        // Forbidden access
+        console.error(
+          "Forbidden - you don't have permission to access this resource"
+        );
+      }
+    }
     return Promise.reject(error);
   }
 );
