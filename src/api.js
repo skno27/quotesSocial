@@ -41,7 +41,9 @@ api.interceptors.response.use(
           "Forbidden - you don't have permission to access this resource"
         );
       }
-      console.error(`Error code: ${error.response.status}`);
+      console.error(
+        `Error code: ${error.response.status} -- ${error.response.status}`
+      );
     }
     return Promise.reject(error);
   }
